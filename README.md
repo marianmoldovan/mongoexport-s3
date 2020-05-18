@@ -1,16 +1,19 @@
-[![Layers](https://images.microbadger.com/badges/image/tefnet/mongobackup-s3.svg)](http://microbadger.com/images/tefnet/mongobackup-s3)
-[![Docker Stars](https://img.shields.io/docker/stars/tefnet/mongobackup-s3.svg?style=flat-square)](https://hub.docker.com/r/tefnet/mongobackup-s3)
-[![Docker Pulls](https://img.shields.io/docker/pulls/tefnet/mongobackup-s3.svg?style=flat-square)](https://hub.docker.com/r/tefnet/mongobackup-s3/)
+[![Layers](https://images.microbadger.com/badges/image/marianmoldovan/mongoexport-s3.svg)](http://microbadger.com/images/marianmoldovan/mongoexport-s3)
+[![Docker Stars](https://img.shields.io/docker/stars/marianmoldovan/mongoexport-s3.svg?style=flat-square)](https://hub.docker.com/r/marianmoldovan/mongoexport-s3)
+[![Docker Pulls](https://img.shields.io/docker/pulls/marianmoldovan/mongoexport-s3.svg?style=flat-square)](https://hub.docker.com/r/marianmoldovan/mongoexport-s3/)
 
 Docker Image for MongoDB AWS S3 backups based on [Alpine Linux](http://www.alpinelinux.org), [mongodump](https://docs.mongodb.com/manual/reference/program/mongodump/) and [awscli](https://github.com/aws/aws-cli)
+
+Fork from [Tefnet/mongobackup-s3](https://github.com/Tefnet/mongobackup-s3). This is intended to export json files of a collection to S3
 
 ## Use
 
 ### Environment variables
 
 - `MONGO_HOST` - MongoDB hostname.
+- `MONGO_COLLECTION` - MongoDB cpññectopm.
 - `S3_BUCKET` - S3 bucket name where backups will be stored.
-- `S3_PATH` - Path in your bucket where backups will be stored.
+- `BACKUP_NAME` - Backup file name
 
 ## IAM Policy
 
@@ -44,4 +47,3 @@ IAM Policy you need to add to IAM user. Please change `BUCKET_NAME` to your S3 b
     ]
 }
 ```
-
