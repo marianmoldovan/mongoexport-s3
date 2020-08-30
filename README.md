@@ -1,4 +1,3 @@
-[![Layers](https://images.microbadger.com/badges/image/marianmoldovan/mongoexport-s3.svg)](http://microbadger.com/images/marianmoldovan/mongoexport-s3)
 [![Docker Stars](https://img.shields.io/docker/stars/marianmoldovan/mongoexport-s3.svg?style=flat-square)](https://hub.docker.com/r/marianmoldovan/mongoexport-s3)
 [![Docker Pulls](https://img.shields.io/docker/pulls/marianmoldovan/mongoexport-s3.svg?style=flat-square)](https://hub.docker.com/r/marianmoldovan/mongoexport-s3/)
 
