@@ -6,6 +6,11 @@ set -e
 [ -z "${S3_BUCKET}" ] && { echo "Please specify S3_BUCKET" > /dev/stderr; exit 1;}
 [ -z "${BACKUP_NAME}" ] && { echo "Please specify S3_PATH" > /dev/stderr; exit 1;}
 
+echo "Exporting reviewgenerator to s3://${S3_BUCKET}/reviewgenerator.json"
+mongoexport --collection=reviewgenerator --out=reviewgenerator.json --uri=${MONGO_HOST}
+echo "Uploading reviewgenerator file"
+aws s3 cp reviewgenerator.json s3://${S3_BUCKET}/reviewgenerator.json
+echo "Exporting completed for reviewgenerator"
 echo "Exporting ${MONGO_COLLECTION} to s3://${S3_BUCKET}/${BACKUP_NAME}"
 mongoexport --sort='{start_time: -1}' --collection=${MONGO_COLLECTION} --out=${BACKUP_NAME} --uri=${MONGO_HOST}
 echo "Cleaning file"
