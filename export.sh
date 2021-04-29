@@ -26,6 +26,15 @@ echo "Exporting aiautodialer to s3://${S3_BUCKET}/aiautodialer.json"
 mongoexport --collection=aiautodialer --out=aiautodialer.json --uri=${MONGO_HOST}
 echo "Uploading aiautodialer file"
 aws s3 cp aiautodialer.json s3://${S3_BUCKET}/aiautodialer/aiautodialer.json
+mongoexport --collection=gmbmessaging --out=gmbmessaging.json --uri=${MONGO_HOST}
+echo "Uploading gmbmessaging file"
+aws s3 cp gmbmessaging.json s3://${S3_BUCKET}/gmbmessaging/gmbmessaging.json
+mongoexport --collection=referralmultiplier_newreferral --out=referralmultiplier_newreferral.json --uri=${MONGO_HOST}
+echo "Uploading referralmultiplier_newreferral file"
+aws s3 cp referralmultiplier_newreferral.json s3://${S3_BUCKET}/referralmultiplier_newreferral/referralmultiplier_newreferral.json
+mongoexport --collection=referralmultiplier_newreferrer --out=referralmultiplier_newreferrer.json --uri=${MONGO_HOST}
+echo "Uploading referralmultiplier_newreferrer file"
+aws s3 cp referralmultiplier_newreferrer.json s3://${S3_BUCKET}/referralmultiplier_newreferrer/referralmultiplier_newreferrer.json
 echo "Exporting ${MONGO_COLLECTION} to s3://${S3_BUCKET}/chatbot.json"
 mongoexport --sort='{start_time: -1}' --collection=${MONGO_COLLECTION} --out=chatbot.json --uri=${MONGO_HOST}
 echo "Cleaning file"
