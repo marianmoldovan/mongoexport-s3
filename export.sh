@@ -35,6 +35,12 @@ aws s3 cp referralmultiplier_newreferral.json s3://${S3_BUCKET}/referralmultipli
 mongoexport --collection=referralmultiplier_newreferrer --out=referralmultiplier_newreferrer.json --uri=${MONGO_HOST}
 echo "Uploading referralmultiplier_newreferrer file"
 aws s3 cp referralmultiplier_newreferrer.json s3://${S3_BUCKET}/referralmultiplier_newreferrer/referralmultiplier_newreferrer.json
+mongoexport --collection=privatereviews --out=privatereviews.json --uri=${MONGO_HOST}
+echo "Uploading privatereviews file"
+aws s3 cp privatereviews.json s3://${S3_BUCKET}/privatereviews/privatereviews.json
+mongoexport --collection=bookingconfirmed --out=bookingconfirmed.json --uri=${MONGO_HOST}
+echo "Uploading bookingconfirmed file"
+aws s3 cp bookingconfirmed.json s3://${S3_BUCKET}/bookingconfirmed/bookingconfirmed.json
 echo "Exporting ${MONGO_COLLECTION} to s3://${S3_BUCKET}/chatbot.json"
 mongoexport --sort='{start_time: -1}' --collection=${MONGO_COLLECTION} --out=chatbot.json --uri=${MONGO_HOST}
 echo "Cleaning file"
