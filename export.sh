@@ -41,6 +41,9 @@ aws s3 cp privatereviews.json s3://${S3_BUCKET}/privatereviews/privatereviews.js
 mongoexport --collection=bookingconfirmed --out=bookingconfirmed.json --uri=${MONGO_HOST}
 echo "Uploading bookingconfirmed file"
 aws s3 cp bookingconfirmed.json s3://${S3_BUCKET}/bookingconfirmed/bookingconfirmed.json
+mongoexport --collection=spintowin --out=spintowin.json --uri=${MONGO_HOST}
+echo "Uploading spintowin file"
+aws s3 cp spintowin.json s3://${S3_BUCKET}/spintowin/spintowin.json
 echo "Exporting ${MONGO_COLLECTION} to s3://${S3_BUCKET}/chatbot.json"
 mongoexport --sort='{start_time: -1}' --collection=${MONGO_COLLECTION} --out=chatbot.json --uri=${MONGO_HOST}
 echo "Cleaning file"
