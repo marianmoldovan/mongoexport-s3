@@ -4,7 +4,7 @@ set -e
 [ -z "${MONGO_HOST}" ] && { echo "Please specify MONGO_HOST" > /dev/stderr; exit 1;}
 [ -z "${MONGO_COLLECTION}" ] && { echo "Please specify MONGO_COLLECTION" > /dev/stderr; exit 1;}
 [ -z "${S3_BUCKET}" ] && { echo "Please specify S3_BUCKET" > /dev/stderr; exit 1;}
-cd /workdir
+
 echo "Exporting reviewgenerator to s3://${S3_BUCKET}/reviewgenerator.json"
 mongoexport --collection=reviewgenerator --out=reviewgenerator.json --uri=${MONGO_HOST}
 echo "Uploading reviewgenerator file"
