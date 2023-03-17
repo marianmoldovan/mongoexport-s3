@@ -46,3 +46,5 @@ IAM Policy you need to add to IAM user. Please change `BUCKET_NAME` to your S3 b
     ]
 }
 ```
+
+Deploy with Github Action to Docker Hub
