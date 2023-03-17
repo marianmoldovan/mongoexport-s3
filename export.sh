@@ -59,4 +59,4 @@ echo "Sorting file"
 jq -S -c '.' clean.json  > sorted.json
 echo "Uploading file"
 aws s3 cp sorted.json s3://${S3_BUCKET}/chatbot/chatbot.json
-echo "Exporting completed"
+echo "Exporting completed."
