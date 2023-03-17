@@ -5,6 +5,10 @@ set -e
 [ -z "${MONGO_COLLECTION}" ] && { echo "Please specify MONGO_COLLECTION" > /dev/stderr; exit 1;}
 [ -z "${S3_BUCKET}" ] && { echo "Please specify S3_BUCKET" > /dev/stderr; exit 1;}
 
+echo "Exporting events to s3://${S3_BUCKET}/events.json"
+mongoexport --collection=events --out=events.json --uri=${MONGO_HOST}
+echo "Uploading events file"
+aws s3 cp events.json s3://${S3_BUCKET}/events/events.json
 echo "Exporting reviewgenerator to s3://${S3_BUCKET}/reviewgenerator.json"
 mongoexport --collection=reviewgenerator --out=reviewgenerator.json --uri=${MONGO_HOST}
 echo "Uploading reviewgenerator file"
