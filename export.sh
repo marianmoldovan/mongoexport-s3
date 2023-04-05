@@ -13,6 +13,10 @@ echo "Exporting kixie to s3://${S3_BUCKET}/kixie.json"
 mongoexport --collection=kixie --out=kixie.json --uri=${MONGO_HOST}
 echo "Uploading kixie file"
 aws s3 cp kixie.json s3://${S3_BUCKET}/kixie/kixie.json
+echo "Exporting kixie_sms to s3://${S3_BUCKET}/kixie_sms.json"
+mongoexport --collection=kixie_sms --out=kixie_sms.json --uri=${MONGO_HOST}
+echo "Uploading kixie_sms file"
+aws s3 cp kixie_sms.json s3://${S3_BUCKET}/kixie/kixie_sms.json
 echo "Exporting forms to s3://${S3_BUCKET}/forms.json"
 mongoexport --collection=forms --out=forms.json --uri=${MONGO_HOST}
 echo "Uploading forms file"
