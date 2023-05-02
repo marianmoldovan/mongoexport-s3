@@ -5,6 +5,15 @@ set -e
 [ -z "${MONGO_COLLECTION}" ] && { echo "Please specify MONGO_COLLECTION" > /dev/stderr; exit 1;}
 [ -z "${S3_BUCKET}" ] && { echo "Please specify S3_BUCKET" > /dev/stderr; exit 1;}
 
+
+echo "Exporting texting_campaigns to s3://${S3_BUCKET}/texting_campaigns.json"
+mongoexport --collection=texting_campaigns --out=texting_campaigns.json --uri=${MONGO_HOST}
+echo "Uploading texting_campaigns file"
+aws s3 cp texting_campaigns.json s3://${S3_BUCKET}/texting_campaigns.json
+echo "Exporting stale_opportunities to s3://${S3_BUCKET}/stale_opportunities.json"
+mongoexport --collection=stale_opportunities --out=stale_opportunities.json --uri=${MONGO_HOST}
+echo "Uploading stale_opportunities file"
+aws s3 cp stale_opportunities.json s3://${S3_BUCKET}/stale_opportunities.json
 echo "Exporting events to s3://${S3_BUCKET}/events.json"
 mongoexport --collection=events --out=events.json --uri=${MONGO_HOST}
 echo "Uploading events file"
