@@ -5,7 +5,10 @@ set -e
 [ -z "${MONGO_COLLECTION}" ] && { echo "Please specify MONGO_COLLECTION" > /dev/stderr; exit 1;}
 [ -z "${S3_BUCKET}" ] && { echo "Please specify S3_BUCKET" > /dev/stderr; exit 1;}
 
-
+echo "Exporting twilio_messages to s3://${S3_BUCKET}/twilio_messages.json"
+mongoexport --collection=twilio_messages --out=twilio_messages.json --uri=${MONGO_HOST}
+echo "Uploading twilio_messages file"
+aws s3 cp twilio_messages.json s3://${S3_BUCKET}/twilio_messages.json
 echo "Exporting texting_campaigns to s3://${S3_BUCKET}/texting_campaigns.json"
 mongoexport --collection=texting_campaigns --out=texting_campaigns.json --uri=${MONGO_HOST}
 echo "Uploading texting_campaigns file"
