@@ -5,15 +5,30 @@ set -e
 [ -z "${MONGO_COLLECTION}" ] && { echo "Please specify MONGO_COLLECTION" > /dev/stderr; exit 1;}
 [ -z "${S3_BUCKET}" ] && { echo "Please specify S3_BUCKET" > /dev/stderr; exit 1;}
 
-COLLECTION_NAMES=("review_reply" "ai_review_removal" "blogs" "social_posting" "website_forms" "email_opens")
-for collection_name in "${COLLECTION_NAMES[@]}"
-do
-    echo "Exporting ${collection_name} to s3://${S3_BUCKET}/${collection_name}.json"
-    mongoexport --collection=${collection_name} --out=${collection_name}.json --uri=${MONGO_HOST}
-    echo "Uploading ${collection_name} file"
-    aws s3 cp ${collection_name}.json s3://${S3_BUCKET}/${collection_name}.json
-done
-
+echo "Exporting email_opens to s3://${S3_BUCKET}/email_opens.json"
+mongoexport --collection=email_opens --out=email_opens.json --uri=${MONGO_HOST}
+echo "Uploading email_opens file"
+aws s3 cp email_opens.json s3://${S3_BUCKET}/email_opens.json
+echo "Exporting review_reply to s3://${S3_BUCKET}/review_reply.json"
+mongoexport --collection=review_reply --out=review_reply.json --uri=${MONGO_HOST}
+echo "Uploading review_reply file"
+aws s3 cp review_reply.json s3://${S3_BUCKET}/review_reply.json
+echo "Exporting ai_review_removal to s3://${S3_BUCKET}/ai_review_removal.json"
+mongoexport --collection=ai_review_removal --out=ai_review_removal.json --uri=${MONGO_HOST}
+echo "Uploading ai_review_removal file"
+aws s3 cp ai_review_removal.json s3://${S3_BUCKET}/ai_review_removal.json
+echo "Exporting blogs to s3://${S3_BUCKET}/blogs.json"
+mongoexport --collection=blogs --out=blogs.json --uri=${MONGO_HOST}
+echo "Uploading blogs file"
+aws s3 cp blogs.json s3://${S3_BUCKET}/blogs.json
+echo "Exporting social_posting to s3://${S3_BUCKET}/social_posting.json"
+mongoexport --collection=social_posting --out=social_posting.json --uri=${MONGO_HOST}
+echo "Uploading social_posting file"
+aws s3 cp social_posting.json s3://${S3_BUCKET}/social_posting.json
+echo "Exporting website_forms to s3://${S3_BUCKET}/website_forms.json"
+mongoexport --collection=website_forms --out=website_forms.json --uri=${MONGO_HOST}
+echo "Uploading website_forms file"
+aws s3 cp website_forms.json s3://${S3_BUCKET}/website_forms.json
 echo "Exporting twilio_messages_v2 to s3://${S3_BUCKET}/twilio_messages_v2.json"
 mongoexport --collection=twilio_messages_v2 --out=twilio_messages_v2.json --uri=${MONGO_HOST}
 echo "Uploading twilio_messages_v2 file"
