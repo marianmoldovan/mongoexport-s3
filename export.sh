@@ -9,6 +9,10 @@ echo "Exporting email_opens to s3://${S3_BUCKET}/email_opens.json"
 mongoexport --collection=email_opens --out=email_opens.json --uri=${MONGO_HOST}
 echo "Uploading email_opens file"
 aws s3 cp email_opens.json s3://${S3_BUCKET}/email_opens.json
+echo "Exporting qrtracker to s3://${S3_BUCKET}/qrtracker.json"
+mongoexport --collection=qrtracker --out=qrtracker.json --uri=${MONGO_HOST}
+echo "Uploading qrtracker file"
+aws s3 cp qrtracker.json s3://${S3_BUCKET}/qrtracker.json
 echo "Exporting review_reply to s3://${S3_BUCKET}/review_reply.json"
 mongoexport --collection=review_reply --out=review_reply.json --uri=${MONGO_HOST}
 echo "Uploading review_reply file"
