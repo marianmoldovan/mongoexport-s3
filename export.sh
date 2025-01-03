@@ -112,7 +112,7 @@ mongoexport --collection=spintowin --out=spintowin.json --uri=${MONGO_HOST}
 echo "Uploading spintowin file"
 aws s3 cp spintowin.json s3://${S3_BUCKET}/spintowin/spintowin.json
 echo "Exporting ${MONGO_COLLECTION} to s3://${S3_BUCKET}/chatbot.json"
-mongoexport --query '{"_id":{"$lt":{"$oid":"677486008af534000886e6d5"}}}' --sort='{start_time: -1}' --collection=${MONGO_COLLECTION} --out=chatbot.json --uri=${MONGO_HOST}
+mongoexport --query '{"_id":{"$gt":{"$oid":"677486008af534000886e6d5"}}}' --sort='{start_time: -1}' --collection=${MONGO_COLLECTION} --out=chatbot.json --uri=${MONGO_HOST}
 echo "Cleaning file"
 cat chatbot.json | jq -c 'del(._id) | if .start_time|type == "object" then .start_time=.start_time["$date"] else .start_time="2000-01-01T00:00:00Z" end | .start_time |= sub("\\.[0-9]{1,3}"; "") | if .stop_time|type == "object" then .stop_time=.stop_time["$date"] else .stop_time="2000-01-01T00:00:00Z" end | .stop_time |= sub("\\.[0-9]{1,3}"; "") | if .phone ==null then .phone="" else .phone=.phone end | if .dob ==null then .dob="" else .dob=.dob end' > clean.json 2>/dev/null
 echo "Sorting file"
