@@ -111,6 +111,10 @@ aws s3 cp newreviews.json s3://${S3_BUCKET}/newreviews/newreviews.json
 mongoexport --collection=spintowin --out=spintowin.json --uri=${MONGO_HOST}
 echo "Uploading spintowin file"
 aws s3 cp spintowin.json s3://${S3_BUCKET}/spintowin/spintowin.json
+echo "Exporting adv_chatbot"
+mongoexport --collection=adv_chatbot --out=adv_chatbot.json --uri=${MONGO_HOST}
+echo "Uploading adv_chatbot file"
+aws s3 cp adv_chatbot.json s3://${S3_BUCKET}/adv_chatbot/adv_chatbot.json
 echo "Exporting ${MONGO_COLLECTION} to s3://${S3_BUCKET}/chatbot.json"
 mongoexport --query '{"_id":{"$gt":{"$oid":"677486008af534000886e6d5"}}}' --sort='{start_time: -1}' --collection=${MONGO_COLLECTION} --out=chatbot.json --uri=${MONGO_HOST}
 echo "Cleaning file"
