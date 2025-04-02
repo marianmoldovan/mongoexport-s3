@@ -9,6 +9,10 @@ echo "Exporting linkgenerator to s3://${S3_BUCKET}/linkgenerator.json"
 mongoexport --collection=linkgenerator --out=linkgenerator.json --uri=${MONGO_HOST}
 echo "Uploading linkgenerator file"
 aws s3 cp linkgenerator.json s3://${S3_BUCKET}/linkgenerator.json
+echo "Exporting fl_blogs to s3://${S3_BUCKET}/fl_blogs.json"
+mongoexport --collection=fl_blogs --out=fl_blogs.json --uri=${MONGO_HOST}
+echo "Uploading fl_blogs file"
+aws s3 cp fl_blogs.json s3://${S3_BUCKET}/fl_blogs.json
 echo "Exporting email_opens to s3://${S3_BUCKET}/email_opens.json"
 mongoexport --collection=email_opens --out=email_opens.json --uri=${MONGO_HOST}
 echo "Uploading email_opens file"
