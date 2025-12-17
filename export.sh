@@ -2,7 +2,6 @@
 set -e
 
 [ -z "${MONGO_HOST}" ] && { echo "Please specify MONGO_HOST" > /dev/stderr; exit 1;}
-[ -z "${MONGO_HOST}" ] && { echo "Please specify MONGO_HOST" > /dev/stderr; exit 1;}
 [ -z "${MONGO_HOST_ANALYTICS}" ] && { echo "Please specify MONGO_HOST_ANALYTICS" > /dev/stderr; exit 1;}
 [ -z "${S3_BUCKET}" ] && { echo "Please specify S3_BUCKET" > /dev/stderr; exit 1;}
 echo "Exporting booking_app v2 analytics to s3://${S3_BUCKET}/booking_app_analytics.json"
@@ -10,7 +9,7 @@ mongoexport --collection=booking_app --out=booking_app.json --uri=${MONGO_HOST_A
 echo "Uploading booking_app v2 analytics file"
 aws s3 cp booking_app.json s3://${S3_BUCKET}/booking_app.json
 echo "Exporting booking_app_analytics to s3://${S3_BUCKET}/booking_app_analytics.json"
-mongoexport --db==data --collection=booking_app_analytics --out=booking_app_analytics.json --uri=${MONGO_HOST}
+mongoexport --collection=booking_app_analytics --out=booking_app_analytics.json --uri=${MONGO_HOST}
 echo "Uploading booking_app_analytics file"
 aws s3 cp booking_app_analytics.json s3://${S3_BUCKET}/booking_app_analytics.json
 echo "Exporting linkgenerator to s3://${S3_BUCKET}/linkgenerator.json"
